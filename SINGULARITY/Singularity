@@ -33,4 +33,5 @@ MirrorURL: http://ftp.us.debian.org/debian/
 
 
 %runscript
-    python /usr/local/rmsynthesis.py
+    cd /mnt
+    python /usr/local/pyrmsynth/rmsynthesis.py "$@"
