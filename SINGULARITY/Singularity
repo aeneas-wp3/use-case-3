@@ -24,7 +24,7 @@ MirrorURL: http://ftp.us.debian.org/debian/
     pip install cython
     pip install pyfits
     pip install pywcs
-    cd /home
+    cd /usr/local
     git init
     git clone https://github.com/mrbell/pyrmsynth.git
     cd pyrmsynth/rm_tools/
@@ -33,5 +33,4 @@ MirrorURL: http://ftp.us.debian.org/debian/
 
 
 %runscript
-    cd /home/pyrmsynth
-    python rmsynthesis.py
+    python /usr/local/rmsynthesis.py
