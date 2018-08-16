@@ -1,0 +1,37 @@
+BootStrap: debootstrap
+OSVersion: stable
+MirrorURL: http://ftp.us.debian.org/debian/
+
+
+%labels
+  maintainer Anna Scaife <anna.scaife@manchester.ac.uk>
+  package.name
+  package.version 0.1.0
+  package.homepage
+  package.source.url
+  package.source.mdm5
+  package.license GPLv3
+
+
+%post
+    apt-get update
+    apt-get -y install python2.7 python-pip
+    apt-get -y install python-tk
+    apt-get -y install git
+    apt-get -y install libgsl-dev
+    pip install numpy
+    pip install matplotlib
+    pip install cython
+    pip install pyfits
+    pip install pywcs
+    cd /home
+    git init
+    git clone https://github.com/mrbell/pyrmsynth.git
+    cd pyrmsynth/rm_tools/
+    python setup.py build_ext --inplace
+    apt-get clean
+
+
+%runscript
+    cd /home/pyrmsynth
+    python rmsynthesis.py
