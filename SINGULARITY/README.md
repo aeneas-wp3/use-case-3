@@ -19,3 +19,12 @@ To run from [Singularity Hub](https://www.singularity-hub.org/collections/1459):
 export SINGULARITY_BINDPATH=/path/on/host/data:/mnt
 singularity run shub://aeneas-wp3/use-case-3 /mnt/NGC6251.par -s
 ```
+
+To run benchmarks (requires same data paths as above):
+
+```bash
+sudo singularity build benchmarks.simg Singularity.Benchmarks.version1
+
+export SINGULARITY_BINDPATH=/path/on/host/data:/mnt
+./benchmarks.simg
+```
