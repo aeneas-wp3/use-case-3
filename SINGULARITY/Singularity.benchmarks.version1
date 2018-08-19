@@ -1,0 +1,40 @@
+BootStrap: debootstrap
+OSVersion: stable
+MirrorURL: http://ftp.us.debian.org/debian/
+
+
+%labels
+  maintainer Anna Scaife <anna.scaife@manchester.ac.uk>
+  package.name
+  package.version 0.1.0
+  package.homepage
+  package.source.url
+  package.source.mdm5
+  package.license GPLv3
+
+
+%post
+    apt-get update
+    apt-get -y install python2.7 python-pip
+    apt-get -y install python-tk
+    apt-get -y install git
+    apt-get -y install libgsl-dev
+    pip install numpy
+    pip install matplotlib
+    pip install cython
+    pip install pyfits
+    pip install pywcs
+    pip install line_profiler
+    cd /usr/local
+    git init
+    git clone https://github.com/as595/pyrmsynth.git
+    cd pyrmsynth/rm_tools/
+    python setup.py build_ext --inplace
+    apt-get clean
+
+
+%runscript
+    cd /mnt
+    python -m cProfile -o /mnt/rmsynth.pstats /usr/local/pyrmsynth/rmsynthesis.py -s /mnt/N$
+    kernprof -l /usr/local/pyrmsynth/rmsynthesis.py -s /mnt/NGC6251.par
+    python -m line_profiler /mnt/rmsynthesis.py.lprof
