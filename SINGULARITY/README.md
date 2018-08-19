@@ -20,6 +20,7 @@ export SINGULARITY_BINDPATH=/path/on/host/data:/mnt
 singularity run shub://aeneas-wp3/use-case-3 /mnt/NGC6251.par -s
 ```
 
+Profiling container
 ---
 
 To run profiling (requires same data paths as above):
