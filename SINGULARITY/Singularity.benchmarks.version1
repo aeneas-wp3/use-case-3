@@ -25,16 +25,26 @@ MirrorURL: http://ftp.us.debian.org/debian/
     pip install pyfits
     pip install pywcs
     pip install line_profiler
+    pip install memory_profiler
     cd /usr/local
     git init
     git clone https://github.com/as595/pyrmsynth.git
     cd pyrmsynth/rm_tools/
     python setup.py build_ext --inplace
+    cd ../rm_tools_decorated/
+    python setup.py build_ext --inplace
     apt-get clean
 
 
 %runscript
+    export PYTHONPATH=$PYTHONPATH:/usr/local/pyrmsynth
     cd /mnt
-    python -m cProfile -o /mnt/rmsynth.pstats /usr/local/pyrmsynth/rmsynthesis.py -s /mnt/N$
+    python -m cProfile -o /mnt/rmsynth.pstats /usr/local/pyrmsynth/rmsynthesis.py -s /mnt/NGC6251.par
     kernprof -l /usr/local/pyrmsynth/rmsynthesis.py -s /mnt/NGC6251.par
     python -m line_profiler /mnt/rmsynthesis.py.lprof
+    python -m memory_profiler /usr/local/pyrmsynth/rmsynthesis_decorated.py -s /mnt/NGC6251.par
+    mprof run /usr/local/pyrmsynth/rmsynthesis_decorated.py -s /mnt/NGC6251.par
+
+
+%environment
+   export PYTHONPATH=$PYTHONPATH:/usr/local/pyrmsynth
