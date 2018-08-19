@@ -13,7 +13,7 @@ export SINGULARITY_BINDPATH=/path/on/host/data:/mnt
 ```
 
 
-To run from Singularity Hub:
+To run from [Singularity Hub](https://www.singularity-hub.org/collections/1459):
 
 ```bash
 export SINGULARITY_BINDPATH=/path/on/host/data:/mnt
